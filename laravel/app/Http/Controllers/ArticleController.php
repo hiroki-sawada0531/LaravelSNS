@@ -30,12 +30,12 @@ class ArticleController extends Controller
         ],
         (object) [
             'id' => 2,
-            'title' => 'タイトル2',
-            'body' => '本文2',
+            'title' => 'タイトル3',
+            'body' => '本文3',
             'created_at' => now(),
             'user' => (object) [
                 'id' => 2,
-                'name' => 'ユーザー名2',
+                'name' => 'ユーザー名3',
             ],
         ],
     ];

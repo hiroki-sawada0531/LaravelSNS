@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Article;
 
+use App\Http\Requests\ArticleRequest;
+
 class ArticleController extends Controller
 {
     public function index() {
@@ -17,5 +19,14 @@ class ArticleController extends Controller
 
     public function create() {
         return view('articles.create');
+    }
+
+    public function store(ArticleRequest $request, Article $article)
+    {
+        $article->title = $request->title;
+        $article->body = $request->body;
+        $article->user_id = $request->user()->id;
+        $article->save();
+        return redirect()->route('articles.index');
     }
 }

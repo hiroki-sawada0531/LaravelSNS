@@ -65,7 +65,6 @@
           </div>
           <!-- modal -->
         @endif
-
       </div>
       <div class="card-body pt-0">
         <h3 class="h4 card-title">

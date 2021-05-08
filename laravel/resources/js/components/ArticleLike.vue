@@ -1,11 +1,11 @@
 <template>
     <div>
         <button type="button" class="btn m-0 p-1 shadow-none">
-            <i class="fas fa-heart mr-1"
-            :class="{'red-text':this.isLikedBy}"
-            @click="clickLike"
-            >
-            </i>
+            <i
+                class="fas fa-heart mr-1"
+                :class="{ 'red-text': this.isLikedBy }"
+                @click="clickLike"
+            />
         </button>
         {{ countLikes }}
     </div>
@@ -13,77 +13,50 @@
 
 <script>
 export default {
-    methods: {
-        clickLike() {
-            if (!this.authorized) {
-                alert('いいね機能はログイン中のみ使用できます')
-                return
-            }
-
-            this.isLikedBy
-            ? this.unlike()
-            :this.like()
-        },
-        async like() {
-            const response = await axios.put(this.endpoint)
-
-            this.isLikedBy = true
-            this.countLikes = response.data.countLikes
-        },
-        async unlike() {
-            const response = await axios.delete(this.endpoint)
-
-            this.isLikedBy = false
-            this.countLikes = response.data.countLikes
-        },
-    },
     props: {
         initialIsLikedBy: {
-            type:Boolean,
-            default:false,
+            type: Boolean,
+            default: false
         },
         initialCountLikes: {
-            type:Number,
-            default:0,
+            type: Number,
+            default: 0
         },
         authorized: {
-            type:Boolean,
-            default:false,
+            type: Boolean,
+            default: false
         },
         endpoint: {
-            type:String,
-        },
+            type: String
+        }
     },
     data() {
         return {
             isLikedBy: this.initialIsLikedBy,
-            countLikes: this.initialCountLikes,
-        }
+            countLikes: this.initialCountLikes
+        };
     },
-
     methods: {
         clickLike() {
             if (!this.authorized) {
-                alert('いいね機能はログイン中のみ使用出来ます')
-                return
+                alert("いいね機能はログイン中のみ使用できます");
+                return;
             }
 
-            this.isLikedBy
-                ? this.unlike()
-                : this.like()
+            this.isLikedBy ? this.unlike() : this.like();
         },
         async like() {
-            const response = await axios.put(this.endpoint)
+            const response = await axios.put(this.endpoint);
 
-            this.isLikedBy = true
-            this.countLikes = response.data.countLikes
+            this.isLikedBy = true;
+            this.countLikes = response.data.countLikes;
         },
         async unlike() {
-            const response = await axios.delete(this.endpoint)
+            const response = await axios.delete(this.endpoint);
 
-            this.isLikedBy = false
-            this.countLikes = response.data.countLikes
-        },
-    },
-}
+            this.isLikedBy = false;
+            this.countLikes = response.data.countLikes;
+        }
+    }
+};
 </script>

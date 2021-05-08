@@ -24,6 +24,18 @@ export default {
             ? this.unlike()
             :this.like()
         },
+        async like() {
+            const response = await axios.put(this.endpoint)
+
+            this.isLikedBy = true
+            this.countLikes = response.data.countLikes
+        },
+        async unlike() {
+            const response = await axios.delete(this.endpoint)
+
+            this.isLikedBy = false
+            this.countLikes = response.data.countLikes
+        },
     },
     props: {
         initialIsLikedBy: {

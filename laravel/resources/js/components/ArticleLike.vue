@@ -60,5 +60,30 @@ export default {
             countLikes: this.initialCountLikes,
         }
     },
+
+    methods: {
+        clickLike() {
+            if (!this.authorized) {
+                alert('いいね機能はログイン中のみ使用出来ます')
+                return
+            }
+
+            this.isLikedBy
+                ? this.unlike()
+                : this.like()
+        },
+        async like() {
+            const response = await axios.put(this.endpoint)
+
+            this.isLikedBy = true
+            this.countLikes = response.data.countLikes
+        },
+        async unlike() {
+            const response = await axios.delete(this.endpoint)
+
+            this.isLikedBy = false
+            this.countLikes = response.data.countLikes
+        },
+    },
 }
 </script>

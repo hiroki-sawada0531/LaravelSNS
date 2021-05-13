@@ -27,28 +27,30 @@
         </div>
         {{-- dropdown --}}
 
-        {{-- modal --}}
+        <!-- modal -->
         <div id="modal-delete-{{ $article->id }}" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="{{ route('articles.destroy', ['article' => $article]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <div class="modal-body">
+                            {{ $article->title }}を削除します。よろしいですか？
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
+                            <button type="submit" class="btn btn-danger">削除する</button>
+                        </div>
+                    </form>
                 </div>
-                <form method="POST" action="{{ route('articles.destroy',['article' => $article]) }}">
-                    @csrf
-                    @method('DELETE')
-                    <div class="modal-body">
-                        {{ $article->title }}を削除します。よろしいですか？
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
-                        <button type="submit" class="btn btn-danger">削除する</button>
-                    </div>
-                </form>
             </div>
         </div>
-        {{-- modal --}}
+        <!-- modal -->
         @endif
     </div>
     <div class="card-body pt-0">
@@ -71,17 +73,17 @@
         </div>
     </div>
 
-    @foreach($article->tags as $tag)
+    {{-- @foreach($article->tags as $tag)
     @if($loop->first)
     <div class="card-body pt-0 pb-4 pl-3">
         <div class="card-text line-height">
             @endif
             <a href="" class="border p-1 mr-1 mt-1 text-muted">
-                {{ $tag-name }}
-            </a>
-            @if($loop->last)
-        </div>
-    </div>
-    @endif
-    @endforeach
+                {{ $tag->name }}
+    </a>
+    @if($loop->last)
+</div>
+</div>
+@endif
+@endforeach --}}
 </div>

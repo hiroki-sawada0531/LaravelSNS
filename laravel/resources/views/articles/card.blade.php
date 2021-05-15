@@ -79,11 +79,21 @@
         <div class="card-text line-height">
             @endif
             <a href="" class="border p-1 mr-1 mt-1 text-muted">
-                {{ $tag->name }}
+                {{ $tag->name }}aaaaaa
             </a>
             @if($loop->last)
         </div>
     </div>
     @endif
     @endforeach
+
+    <div class="card-body pt-0 pb-4 pl-3">
+        <div class="card-text line-height">
+            {{-- @endif --}}
+            <a href="" class="border p-1 mr-1 mt-1 text-muted">
+                {{-- {{ $tag->name }} --}}aaaaaa
+            </a>
+            {{-- @if($loop->last) --}}
+        </div>
+    </div>
 </div>

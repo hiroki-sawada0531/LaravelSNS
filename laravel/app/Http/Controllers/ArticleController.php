@@ -33,19 +33,24 @@ class ArticleController extends Controller
         $article->user_id = $request->user()->id;
         $article->save();
 
-        // $request->tags->each(function ($tagName) use ($article) {
-        //     var_dump(each);
-
-        //     $tag = Tag::firstOrCreate(['name' => $tagName]);
-        //     $article->tags()->attach($tag);
-        // });
+        $request->tags->each(function ($tagName) use ($article) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $article->tags()->attach($tag);
+        });
 
         return redirect()->route('articles.index');
     }
 
     public function edit(Article $article)
     {
-        return view('articles.edit',['article' => $article]);
+        $tagName = $article->tags->map(function ($tag) {
+            return ['text' => $tag->name];
+        });
+
+        return view('articles.edit',[
+            'article' => $article,
+            'tagNames' => $tagNames,
+        ]);
     }
 
     public function update(ArticleRequest $request, Article $article)

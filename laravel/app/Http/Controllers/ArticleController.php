@@ -43,7 +43,7 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        $tagName = $article->tags->map(function ($tag) {
+        $tagNames = $article->tags->map(function ($tag) {
             return ['text' => $tag->name];
         });
 

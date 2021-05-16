@@ -56,6 +56,10 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, Article $article)
     {
         $article->fill($request->all())->save();
+        $article->tags()->each(function ($tagName) use ($article) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $article->tags()->attach($tag);
+        });
         return redirect()->route('articles.index');
     }
 
